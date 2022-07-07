@@ -1,8 +1,7 @@
-import pprint
 
 contador = 0
 usuario = {}
-while (contador != 6):
+while True:
     print("""Bienvenido a Transportico
 
     Menu: 
@@ -12,26 +11,39 @@ while (contador != 6):
         4.	Horas trabajadas y salario
         5.	Horas de operación de vehículos
         6.	Salir        """)
-    opcion = int(input("\nElija una opcion: "))
-    if(opcion == 1):
+    opcion = input("\nElija una opcion: ")
+    if(opcion == "1"):
         nombre = input("\nIngresar el nombre del usuario: ")
         if(nombre in usuario.keys()):
             print("Este usuario ya existe\n")
         else:
             contraseña = input("\nIngrese la contraseña: ")
             usuario[nombre] = contraseña
-            pprint.pprint(usuario)
-            print("Usuario creado correctmente")
-    elif(opcion == 2):
+            lista_usuario = []
+            for key in usuario:
+                lista_usuario.append(key)
+            lista_usuario = sorted(lista_usuario)
+            print(lista_usuario)
+            print("Usuario creado correctmente\n")
+    elif(opcion == "2"):
         nombre = input("\nIngresar el nombre del usuario: ")
         if (nombre in usuario.keys()):
             bool = input("Desea eliminar de forma permanente si/no: ")
             if(bool == "si"):
                 usuario.pop(nombre)
-                pprint.pprint(usuario)
+                lista_usuario1 = []
+                for key in usuario:
+                    lista_usuario1.append(key)
+                lista_usuario1 = sorted(lista_usuario1)
+                print(lista_usuario1)
                 print("Usuario eliminado")
             else:
                 print("Cancelado")
         else:
-            print("No existe")
+           print("No existe")
+    elif(opcion == "6"):
+        print("Programa cerrado")
+        break
+    else:
+        print("Opcion no valida, intente de nuevo")
 
