@@ -1,1 +1,37 @@
+import pprint
+
+contador = 0
+usuario = {}
+while (contador != 6):
+    print("""Bienvenido a Transportico
+
+    Menu: 
+        1.	Agregar usuario
+        2.	Eliminar usuario
+        3.	Asignar transporte
+        4.	Horas trabajadas y salario
+        5.	Horas de operación de vehículos
+        6.	Salir        """)
+    opcion = int(input("\nElija una opcion: "))
+    if(opcion == 1):
+        nombre = input("\nIngresar el nombre del usuario: ")
+        if(nombre in usuario.keys()):
+            print("Este usuario ya existe\n")
+        else:
+            contraseña = input("\nIngrese la contraseña: ")
+            usuario[nombre] = contraseña
+            pprint.pprint(usuario)
+            print("Usuario creado correctmente")
+    elif(opcion == 2):
+        nombre = input("\nIngresar el nombre del usuario: ")
+        if (nombre in usuario.keys()):
+            bool = input("Desea eliminar de forma permanente si/no: ")
+            if(bool == "si"):
+                usuario.pop(nombre)
+                pprint.pprint(usuario)
+                print("Usuario eliminado")
+            else:
+                print("Cancelado")
+        else:
+            print("No existe")
 
