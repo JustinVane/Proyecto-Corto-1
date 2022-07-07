@@ -34,4 +34,5 @@ while (contador != 6):
                 print("Cancelado")
         else:
             print("No existe")
+            #no sea pendejo, no existe ese usuario
 
