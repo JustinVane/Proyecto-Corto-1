@@ -45,5 +45,4 @@ while True:
         print("Programa cerrado")
         break
     else:
-        print("Opcion no valida, intente de nuevo")
-
+        print("Opcion no valida, intente de nuevo") #Añadiendo comentario de prueba
