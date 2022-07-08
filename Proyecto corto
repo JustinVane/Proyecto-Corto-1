@@ -1,9 +1,41 @@
 
-contador = 0
-usuario = {}
-while True:
-    print("""Bienvenido a Transportico
+cuentas_registradas = {'justin':'jus123','cristopher':'cri123','professor':'pro123'} #Cuentas registradas por default
+transportes = ['buseta pequeña','buseta grande','bus','camion liviano','camion pesado'] #Carros de empresa
 
+#MENU DE INICIO
+print('Bienvenido a Transportico')
+while True:
+    print(""" 
+A: Iniciar sesion
+B: Salir del programa
+    """)
+    opcion_inicio = input('Por favor seleccione A o B:')
+
+    if opcion_inicio.lower() == 'a':
+        print('\nDigite su usuario y contraseña')
+        usuario = input('Usuario:')
+        contrasena = input('Constraseña:')
+
+        #Verificacion de usuarios registrados
+        if usuario in cuentas_registradas:
+            if contrasena == cuentas_registradas[usuario]:
+                print('Contraseña correcta\n')
+                break
+            else:
+                print('\nContraseña incorrecta, intente nuevamente\n')
+        else:
+            print('Usuario no valido, intente nuevamente\n')
+
+    elif opcion_inicio.lower() == 'b':
+        print('Programa terminado')
+        break
+    else:
+        print('\nLa opción seleccionada no es valida, por favor intente nuevamente')
+        continue
+#MENU DE USUARIO
+print('Bienvenido a Transportico')
+while True:
+    print("""
     Menu: 
         1.	Agregar usuario
         2.	Eliminar usuario
@@ -14,25 +46,25 @@ while True:
     opcion = input("\nElija una opcion: ")
     if(opcion == "1"):
         nombre = input("\nIngresar el nombre del usuario: ")
-        if(nombre in usuario.keys()):
+        if(nombre in cuentas_registradas.keys()):
             print("Este usuario ya existe\n")
         else:
             contraseña = input("\nIngrese la contraseña: ")
-            usuario[nombre] = contraseña
+            cuentas_registradas[nombre] = contraseña
             lista_usuario = []
-            for key in usuario:
+            for key in cuentas_registradas:
                 lista_usuario.append(key)
             lista_usuario = sorted(lista_usuario)
             print(lista_usuario)
             print("Usuario creado correctmente\n")
     elif(opcion == "2"):
         nombre = input("\nIngresar el nombre del usuario: ")
-        if (nombre in usuario.keys()):
+        if (nombre in cuentas_registradas.keys()):
             bool = input("Desea eliminar de forma permanente si/no: ")
             if(bool == "si"):
-                usuario.pop(nombre)
+                cuentas_registradas.pop(nombre)
                 lista_usuario1 = []
-                for key in usuario:
+                for key in cuentas_registradas:
                     lista_usuario1.append(key)
                 lista_usuario1 = sorted(lista_usuario1)
                 print(lista_usuario1)
@@ -45,4 +77,4 @@ while True:
         print("Programa cerrado")
         break
     else:
-        print("Opcion no valida, intente de nuevo") #Añadiendo comentario de prueba
+        print("Opcion no valida, intente de nuevo")
