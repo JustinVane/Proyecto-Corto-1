@@ -3,6 +3,7 @@ cuentas_registradas = {'justin':'jus123','cristopher':'cri123','professor':'pro1
 transportes = ['buseta pequeña','buseta grande','bus','camion liviano','camion pesado'] #Carros de empresa
 
 #MENU DE INICIO
+sesion_on = True
 print('Bienvenido a Transportico')
 while True:
     print(""" 
@@ -28,13 +29,13 @@ B: Salir del programa
 
     elif opcion_inicio.lower() == 'b':
         print('Programa terminado')
+        sesion_on = False
         break
     else:
         print('\nLa opción seleccionada no es valida, por favor intente nuevamente')
         continue
 #MENU DE USUARIO
-print('Bienvenido a Transportico')
-while True:
+while sesion_on == True or opcion == "6":
     print("""
     Menu: 
         1.	Agregar usuario
