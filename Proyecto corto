@@ -8,12 +8,12 @@ sesion_on = True
 print('Bienvenido a Transportico')
 while True:
     print(""" 
-A: Iniciar sesion
-B: Salir del programa
+1: Iniciar sesion
+2: Salir del programa
     """)
-    opcion_inicio = input('Por favor seleccione A o B:')
-
-    if opcion_inicio.lower() == 'a':
+    opcion_inicio = input('Por favor seleccione 1 o 2:')
+    #OPCION INICIAR SESION
+    if opcion_inicio.lower() == '1':
         print('\nDigite su usuario y contraseña')
         usuario = input('Usuario:')
         contrasena = input('Constraseña:')
@@ -22,90 +22,93 @@ B: Salir del programa
         if usuario in cuentas_registradas:
             if contrasena == cuentas_registradas[usuario]:
                 print('Contraseña correcta\n')
-                break
+
+                # MENU DE USUARIO
+                while sesion_on == True:
+                    print("""
+    Menu: 
+    1.	Agregar usuario
+    2.	Eliminar usuario
+    3.	Asignar transporte
+    4.	Horas trabajadas y salario
+    5.	Horas de operación de vehículos
+    6.	Cerrar sesión        """)
+                    opcion = input("\nElija una opcion: ")
+                    # OPCION AGREGAR USUARIO
+                    if (opcion == "1"):
+                        nombre = input("\nIngresar el nombre del usuario: ")
+                        if (nombre in cuentas_registradas.keys()):
+                            print("Este usuario ya existe\n")
+                        else:
+                            contraseña = input("\nIngrese la contraseña: ")
+                            cuentas_registradas[nombre] = contraseña
+                            lista_usuario = []
+                            for key in cuentas_registradas:
+                                lista_usuario.append(key)
+                            lista_usuario = sorted(lista_usuario)
+                            print(lista_usuario)
+                            print("Usuario creado correctmente\n")
+                    # OPCION ELIMINAR USUARIO
+                    elif (opcion == "2"):
+                        nombre = input("\nIngresar el nombre del usuario: ")
+                        if (nombre in cuentas_registradas.keys()):
+                            bool = input("Desea eliminar de forma permanente si/no: ")
+                            if (bool == "si"):
+                                cuentas_registradas.pop(nombre)
+                                lista_usuario1 = []
+                                for key in cuentas_registradas:
+                                    lista_usuario1.append(key)
+                                lista_usuario1 = sorted(lista_usuario1)
+                                print(lista_usuario1)
+                                print("Usuario eliminado")
+                            else:
+                                print("Cancelado")
+                        else:
+                            print("No existe")
+                    # OPCION AGREGAR TRANSPORTE
+
+                    elif (opcion == '3'):
+                        datos = [0, 1, 2, 3, 4]  # Lista de datos requeridos [Nombre,Transporte,Día,Mes,Horas]
+                        datos[0] = input('Nombre del trabajador:').lower()  # Nombre a ingresar
+                        while True:
+                            print('Transportes:buseta pequeña,buseta grande,bus,camion liviano,camion pesado\n')
+                            datos[1] = input('Ingrese el transporte:').lower()  # Transporte a ingresar
+                            if datos[1] in transportes:  # verificando que el transporte esta en la lista
+                                break
+                            else:
+                                print(
+                                    'El transporte ingresado no corresponde a ninguna de las opciones disponibles, intente nuevamente\n')
+                                continue
+                        while True:
+                            print('Ingrese la fecha: Dia/Mes')
+                            try:
+                                datos[2] = int(input('Día:'))  # Ingresando fecha y hora de trabajo en formato "int"
+                                datos[3] = int(input('Mes:'))
+                                datos[4] = float(input('Cantidad de horas trabajadas:'))
+                                break
+                            except:
+                                print('Error, por favor ingrese datos numericos enteros')
+                                continue
+                        base_datos.append(datos)
+                        print(base_datos)
+                    # OPCION SALIR
+                    elif (opcion == "6"):
+                        print("Sesión cerrada")
+                        break
+                    else:
+                        print("Opcion no valida, intente de nuevo")
+
+                continue
             else:
                 print('\nContraseña incorrecta, intente nuevamente\n')
         else:
             print('Usuario no valido, intente nuevamente\n')
 
-    elif opcion_inicio.lower() == 'b':
+    #OPCION SALIR DEL PROGRAMA
+    elif opcion_inicio.lower() == '2':
         print('Programa terminado')
         sesion_on = False
         break
     else:
         print('\nLa opción seleccionada no es valida, por favor intente nuevamente')
         continue
-#MENU DE USUARIO
-while sesion_on == True:
-    print("""
-    Menu: 
-        1.	Agregar usuario
-        2.	Eliminar usuario
-        3.	Asignar transporte
-        4.	Horas trabajadas y salario
-        5.	Horas de operación de vehículos
-        6.	Salir        """)
-    opcion = input("\nElija una opcion: ")
-    #OPCION AGREGAR USUARIO
-    if(opcion == "1"):
-        nombre = input("\nIngresar el nombre del usuario: ")
-        if(nombre in cuentas_registradas.keys()):
-            print("Este usuario ya existe\n")
-        else:
-            contraseña = input("\nIngrese la contraseña: ")
-            cuentas_registradas[nombre] = contraseña
-            lista_usuario = []
-            for key in cuentas_registradas:
-                lista_usuario.append(key)
-            lista_usuario = sorted(lista_usuario)
-            print(lista_usuario)
-            print("Usuario creado correctmente\n")
-    #OPCION ELIMINAR USUARIO
-    elif(opcion == "2"):
-        nombre = input("\nIngresar el nombre del usuario: ")
-        if (nombre in cuentas_registradas.keys()):
-            bool = input("Desea eliminar de forma permanente si/no: ")
-            if(bool == "si"):
-                cuentas_registradas.pop(nombre)
-                lista_usuario1 = []
-                for key in cuentas_registradas:
-                    lista_usuario1.append(key)
-                lista_usuario1 = sorted(lista_usuario1)
-                print(lista_usuario1)
-                print("Usuario eliminado")
-            else:
-                print("Cancelado")
-        else:
-           print("No existe")
-    #OPCION AGREGAR TRANSPORTE
-
-    elif (opcion == '3'):
-        datos = [0, 1, 2, 3, 4]  # Lista de datos requeridos [Nombre,Transporte,Día,Mes,Horas]
-        datos[0] = input('Nombre del trabajador:').lower()          #Nombre a ingresar
-        while True:
-            print('Transportes:buseta pequeña,buseta grande,bus,camion liviano,camion pesado\n')
-            datos[1] = input('Ingrese el transporte:').lower()      #Transporte a ingresar
-            if datos[1] in transportes:                             #verificando que el transporte esta en la lista
-                break
-            else:
-                print(
-                    'El transporte ingresado no corresponde a ninguna de las opciones disponibles, intente nuevamente\n')
-                continue
-        while True:
-            print('Ingrese la fecha: Dia/Mes')
-            try:
-                datos[2] = int(input('Día:'))                           #Ingresando fecha y hora de trabajo en formato "int"
-                datos[3] = int(input('Mes:'))
-                datos[4] = float(input('Cantidad de horas trabajadas:'))
-                break
-            except:
-                print('Error, por favor ingrese datos numericos enteros')
-                continue
-        base_datos.append(datos)
-        print(base_datos)
-    #OPCION SALIR
-    elif(opcion == "6"):
-        print("Programa cerrado")
-        break
-    else:
-        print("Opcion no valida, intente de nuevo")
