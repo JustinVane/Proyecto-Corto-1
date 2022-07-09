@@ -1,6 +1,7 @@
 
 cuentas_registradas = {'justin':'jus123','cristopher':'cri123','professor':'pro123'} #Cuentas registradas por default
 transportes = ['buseta pequeña','buseta grande','bus','camion liviano','camion pesado'] #Carros de empresa
+base_datos = []
 
 #MENU DE INICIO
 sesion_on = True
@@ -35,7 +36,7 @@ B: Salir del programa
         print('\nLa opción seleccionada no es valida, por favor intente nuevamente')
         continue
 #MENU DE USUARIO
-while sesion_on == True or opcion == "6":
+while sesion_on == True:
     print("""
     Menu: 
         1.	Agregar usuario
@@ -45,6 +46,7 @@ while sesion_on == True or opcion == "6":
         5.	Horas de operación de vehículos
         6.	Salir        """)
     opcion = input("\nElija una opcion: ")
+    #OPCION AGREGAR USUARIO
     if(opcion == "1"):
         nombre = input("\nIngresar el nombre del usuario: ")
         if(nombre in cuentas_registradas.keys()):
@@ -58,6 +60,7 @@ while sesion_on == True or opcion == "6":
             lista_usuario = sorted(lista_usuario)
             print(lista_usuario)
             print("Usuario creado correctmente\n")
+    #OPCION ELIMINAR USUARIO
     elif(opcion == "2"):
         nombre = input("\nIngresar el nombre del usuario: ")
         if (nombre in cuentas_registradas.keys()):
@@ -74,6 +77,33 @@ while sesion_on == True or opcion == "6":
                 print("Cancelado")
         else:
            print("No existe")
+    #OPCION AGREGAR TRANSPORTE
+
+    elif (opcion == '3'):
+        datos = [0, 1, 2, 3, 4]  # Lista de datos requeridos [Nombre,Transporte,Día,Mes,Horas]
+        datos[0] = input('Nombre del trabajador:').lower()          #Nombre a ingresar
+        while True:
+            print('Transportes:buseta pequeña,buseta grande,bus,camion liviano,camion pesado\n')
+            datos[1] = input('Ingrese el transporte:').lower()      #Transporte a ingresar
+            if datos[1] in transportes:                             #verificando que el transporte esta en la lista
+                break
+            else:
+                print(
+                    'El transporte ingresado no corresponde a ninguna de las opciones disponibles, intente nuevamente\n')
+                continue
+        while True:
+            print('Ingrese la fecha: Dia/Mes')
+            try:
+                datos[2] = int(input('Día:'))                           #Ingresando fecha y hora de trabajo en formato "int"
+                datos[3] = int(input('Mes:'))
+                datos[4] = float(input('Cantidad de horas trabajadas:'))
+                break
+            except:
+                print('Error, por favor ingrese datos numericos enteros')
+                continue
+        base_datos.append(datos)
+        print(base_datos)
+    #OPCION SALIR
     elif(opcion == "6"):
         print("Programa cerrado")
         break
